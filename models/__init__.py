@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""instantiation of FileStorage and reload"""
+'''instantiation of FileStorage and reload'''
 from models.engine.file_storage import FileStorage
 
 storage = FileStorage()
