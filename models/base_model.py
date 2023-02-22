@@ -51,6 +51,8 @@ class BaseModel:
     def save(self):
         """Updates the attribute 'updated_at' with the current datetime and saves the model to storage"""
         self.updated_at = datetime.utcnow()
+        models.storage.new(self)
+        models.storage.save()
 
 
     def delete(self):
