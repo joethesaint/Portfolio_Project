@@ -14,7 +14,7 @@ class User(BaseModel, Base):
     __tablename__ = "users"
     first_name = Column(String(128), nullable=True)
     last_name = Column(String(128), nullable=True)
-    email = Column(String(128), nullable=False)
+    email = Column(String(128), nullable=False)#, unique=True
     password = Column(String(128), nullable=False)
     restaurant_reviews = relationship("RestaurantReview", backref="users", cascade="all, delete, delete-orphan")
     food_reviews = relationship("FoodReview", backref="users", cascade="all, delete, delete-orphan")
@@ -22,3 +22,4 @@ class User(BaseModel, Base):
     def __init__(self, *args, **kwargs):
         """Initialisation of the User Class"""
         super().__init__(*args, **kwargs)
+        self.password = md5(bytes(self.password, 'UTF-8')).hexdigest()

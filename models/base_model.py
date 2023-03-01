@@ -47,7 +47,26 @@ class BaseModel:
         """String representation of the BaseModel class"""
         return "[{:s}] ({:s}) {}".format(self.__class__.__name__, self.id, self.__dict__)
 
-    
+
+    def to_dict(self):
+        """Converts objects to its dictionary representation"""
+        new_dict = self.__dict__.copy()
+
+        if '_sa_instance_state' in new_dict:
+            del new_dict['_sa_instance_state']
+
+        if self.__class__.__name__ == 'Restaurant':
+            new_dict['min'] = self.price_range()['min']
+            new_dict['max'] = self.price_range()['max']
+
+        if self.__class__.__name__ == 'Food':
+            new_dict['restaurant_name'] = self.get_restaurant().name
+            new_dict['restaurant_id'] = self.get_restaurant().id
+
+        new_dict['no_of_reviews'] = self.get_rating()['len']
+        new_dict['total_rate'] = self.get_rating()['total']
+        return new_dict
+
     def save(self):
         """Updates the attribute 'updated_at' with the current datetime and saves the model to storage"""
         self.updated_at = datetime.utcnow()
@@ -57,4 +76,4 @@ class BaseModel:
 
     def delete(self):
         """Deletes the current instance from the storage"""
-        pass
+        models.storage.delete(self)

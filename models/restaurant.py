@@ -22,3 +22,46 @@ class Restaurant(BaseModel, Base):
     def __init__(self, *args, **kwargs):
         """Initialises Restaurant"""
         super().__init__(*args, **kwargs)
+
+    def get_rating(self):
+        """Gets the rating of a Restaurant and returns it as a dictionary"""
+        rating_dict = {
+            'ambience': 0,
+            'cleanliness': 0,
+            'service': 0,
+            'uniqueness': 0,
+            'total': 0
+        }
+
+        if len(self.reviews):
+            for review in self.reviews:
+                rating_dict['ambience'] += review.ambience
+                rating_dict['cleanliness'] += review.cleanliness
+                rating_dict['service'] += review.service
+                rating_dict['uniqueness'] += review.uniqueness
+                rating_dict['total'] += review.rating
+
+            for key, rating in rating_dict.items():
+                rating_dict[key] = rating / len(self.reviews)
+        
+        rating_dict['len'] = len(self.reviews)
+        return rating_dict
+
+        
+    def price_range(self):
+        """Get the min and max price in the restaurant menu"""
+        price_dict = {
+            'min': 0,
+            'max': 0
+        }
+        price_list = []
+
+        for food in self.foods:
+            price_list.append(food.price)
+
+        if price_list:
+            price_dict['min'] = min(price_list)
+            price_dict['max'] = max(price_list)
+
+        return price_dict
+
