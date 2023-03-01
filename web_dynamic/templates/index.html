@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block title %}Home Page{% endblock title %}
+{% block body %}
+
+{% include 'partials/_land.html' %}
+<div style="width: 92%; margin: auto;">
+<section class="mb-5">
+    <div class="title">
+      <h2>Top Restaurants</h2>
+    </div>
+<div class="row">
+    {% for rest in top_restaurants %}
+      <article class="col-3 mb-3">
+          <div class="card" style="width: 18rem;">
+            <img src="{{ url_for('static', filename='images/background/bg-1.jpeg') }}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ rest.name }}</h5>
+              <p class="card-text fst-italic description" style="font-size: 13px;">{{ rest.description }}</p> 
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Price Range: <span class="float-end">&#8358;{{ rest.price_range().min }} - &#8358;{{ rest.price_range().max }}</span></li>
+            <li class="list-group-item">Rating: <span class="float-end">{% if rest.reviews %}{{ rest.get_rating().total }} {% else %} not rated{% endif %}</span></li>
+            <li class="list-group-item">No. of Reviews <span class="float-end">{{ rest.get_rating().len }}</span></li>
+          </ul>
+          <div class="card-body">
+            <a href="/restaurants/{{ rest.id }}" class="card-link"><button class="btn btn-sm btn-outline-primary">See more</button></a>
+            <a href="/restaurants/review/{{ rest.id }}" class="card-link"><button class="btn btn-sm btn-outline-primary float-end">Review</button></a>
+          </div>
+        
+      </article>
+    {% endfor %}
+</div>
+  </section>
+
+  <section class="mb-5">
+    <div class="title">
+      <h2>Top Dishes</h2>
+    </div>
+<div class="row">
+    {% for food in top_foods %}
+    <article class="col-3 mb-3">
+        <div class="card" style="width: 18rem;">
+          <img src="{{ url_for('static', filename='images/background/bg-1.jpeg') }}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{ food.name }}</h5>
+            <p class="card-text fst-italic description" style="font-size: 13px;">{{ food.description }}</p> 
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Served By <span class="float-end"><a href="/restaurants/{{ food.get_restaurant().id }}">{{ food.get_restaurant().name }}</a></span></li>
+          <li class="list-group-item">Price <span class="float-end">&#8358;{{ food.price }}</span></li>
+          <li class="list-group-item">Rating: <span class="float-end">{% if food.reviews %}{{ food.get_rating().total }} {% else %} not rated{% endif %}</span></li>
+          <li class="list-group-item">No. of Reviews <span class="float-end">{{ food.get_rating().len }}</span></li>
+        </ul>
+        <div class="card-body">
+          <a href="/foods/{{ food.id }}" class="card-link"><button class="btn btn-sm btn-outline-primary">See more</button></a>
+          <a href="/foods/review/{{ food.id }}" class="card-link"><button class="btn btn-sm btn-outline-primary float-end">Review</button></a>
+        </div>
+    </article>
+    {% endfor %}
+</div>
+  </section>
+</section>
+
+<section class="mb-5">
+  <div class="title">
+    <h2>New Restaurants</h2>
+  </div>
+<div class="row">
+    {% for rest in new_restaurants %}
+    <article class="col-3 mb-3">
+        <div class="card" style="width: 18rem;">
+          <img src="{{ url_for('static', filename='images/background/bg-1.jpeg') }}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{ rest.name }}</h5>
+            <p class="card-text fst-italic description" style="font-size: 13px;">{{ rest.description }}</p> 
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Price Range: <span class="float-end">&#8358;{{ rest.price_range().min }} - &#8358;{{ rest.price_range().max }}</span></li>
+          <li class="list-group-item">Rating: <span class="float-end">{% if rest.reviews %}{{ rest.get_rating().total }} {% else %} not rated{% endif %}</span></li>
+          <li class="list-group-item">No. of Reviews <span class="float-end">{{ rest.get_rating().len }}</span></li>
+        </ul>
+        <div class="card-body">
+          <a href="/restaurants/{{ rest.id }}" class="card-link"><button class="btn btn-sm btn-outline-primary">See more</button></a>
+          <a href="/restaurants/review/{{ rest.id }}" class="card-link"><button class="btn btn-sm btn-outline-primary float-end">Review</button></a>
+        </div> 
+    </article>
+  {% endfor %}
+</div>
+</section>
+<section class="mb-5">
+    <div class="title">
+      <h2>New Dishes</h2>
+    </div>
+  <div class="row mb-5">
+      {% for food in new_foods %}
+      <article class="col-3 mb-3">
+          <div class="card" style="width: 18rem;">
+            <img src="{{ url_for('static', filename='images/background/bg-1.jpeg') }}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ food.name }}</h5>
+              <p class="card-text fst-italic description" style="font-size: 13px;">{{ food.description }}</p> 
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Served By <span class="float-end"><a href="/restaurants/{{ food.get_restaurant().id }}">{{ food.get_restaurant().name }}</a></span></li>
+            <li class="list-group-item">Price <span class="float-end">&#8358;{{ food.price }}</span></li>
+            <li class="list-group-item">Rating: <span class="float-end">{% if food.reviews %}{{ food.get_rating().total }} {% else %} not rated{% endif %}</span></li>
+            <li class="list-group-item">No. of Reviews <span class="float-end">{{ food.get_rating().len }}</span></li>
+          </ul>
+          <div class="card-body">
+            <a href="/foods/{{ food.id }}" class="card-link"><button class="btn btn-sm btn-outline-primary">See more</button></a>
+            <a href="/foods/review/{{ food.id }}" class="card-link"><button class="btn btn-sm btn-outline-primary float-end">Review</button></a>
+          </div>
+      </article>
+    {% endfor %}
+  </div>
+  </section>
+</div>
+{% endblock body %}

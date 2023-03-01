@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>foodfind · {% block title %}{% endblock title %}</title>
+
+  <link href="{{ url_for('static', filename='styles/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='styles/main.css') }}" rel="stylesheet">
+  </head>
+  <body>
+    
+<header>
+  <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light" style="border-bottom: 1px solid lightgray;">
+    <div class="container-fluid" style="width: 90%;">
+        <a class="navbar-brand" href="/">Foodfind</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <div class="w-100">
+            {% if session.logged_in %}
+              <a class="btn btn-outline-success me-2 float-end" href="#" role="button">Write Review</a>
+              <a class="btn btn-outline-danger me-2 float-end" href="/logout" role="button">Logout</a>
+            {% else %}
+              <a class="btn btn-outline-success me-2 float-end" href="/login" role="button">Login</a>
+              <a class="btn btn-outline-danger me-2 float-end" href="/register" role="button">Sign Up</a>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main style="">
+
+
+
+  {% block body %}{% endblock body %}
+
+
+
+</main>  
+  <!-- FOOTER -->
+  <footer class=" text-center mt-3">
+  <div class="">
+    <p class="float-end"><a href="#">Back to top</a></p>
+    <p>&copy; 2017–2023 foodfind, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+  </div>
+  </footer>
+      
+  </body>
+</html>

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}View Review{% endblock title %}
+{% block body %}
+    <h1>{{ food.name }}</h1>
+    <p>Reviewed by: {{ user.last_name }} {{ user.first_name }}</p>
+    <p>Appearance: {{ review.appearance }}</p>
+    <p>Quality: {{ review.quality }}</p>
+    <p>Execution: {{ review.execution }}</p>
+    <p>Taste: {{ review.taste }}</p>
+    <p>Total Rating {{ review.rating }}</p>
+{% endblock body %}
