@@ -1,4 +1,4 @@
-from flask import jsonify, render_template, redirect, request
+from flask import jsonify, render_template, request
 import json
 from models import storage
 from models.city import City
