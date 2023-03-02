@@ -63,7 +63,7 @@ body {
   }
   /* Since positioning the image, we need to help out the caption */
   .carousel-caption {
-    top: 27%;
+    top: 50%;
     z-index: 10;
   }
   
