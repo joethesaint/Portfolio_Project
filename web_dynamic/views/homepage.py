@@ -9,14 +9,23 @@ from web_dynamic.views import app_views
 @app_views.route("/")
 def index():
     foods = storage.all(Food)
-    restaurant = storage.all(Restaurant)
-    return render_template("index.html", top_restaurants=restaurant, top_foods=foods, new_restaurants=restaurant, new_foods=foods)
+    restaurants = storage.all(Restaurant)
+    top_restaurants = sorted(restaurants, key=lambda k: (k.get_rating()['len'], k.get_rating()['total']), reverse=True)[:8]
+    # top_restaurants = sorted(top_restaurants, key=lambda k: k.get_rating()['total'], reverse=True)
+
+    top_foods = sorted(foods, key=lambda k: (k.get_rating()['len'], k.get_rating()['total']), reverse=True)[:8]
+
+    new_restaurants = sorted(restaurants, key=lambda k: k.created_at, reverse=True)[:8]
+
+    new_foods = sorted(foods, key=lambda k: k.created_at, reverse=True)[:8]
+    return render_template("index.html", top_restaurants=top_restaurants, top_foods=top_foods, new_restaurants=new_restaurants, new_foods=new_foods)
 
 
 @app_views.route("/search", methods=['POST', 'GET'])
 def search():
     cities = storage.all(City)
     restaurants = storage.all(Restaurant)
+    cities = sorted(cities, key=lambda k: k.name)
     if request.method == "POST":
         data_list = []
         data = json.loads(request.data)

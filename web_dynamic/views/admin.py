@@ -36,6 +36,7 @@ def add_restaurant():
 @app_views.route('/add_food', methods=['GET', 'POST'])
 def add_food():
     restaurants = storage.all(Restaurant)
+    restaurants = sorted(restaurants, key=lambda k: k.name)
     if request.method == "POST":
         restaurant = storage.get(Restaurant, request.form['restaurant'])
         if restaurant is None:
