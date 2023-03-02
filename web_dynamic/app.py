@@ -1,13 +1,19 @@
 #!/usr/bin/python3
 """Starts a Flask Web App"""
 from models import storage
-from flask import Flask, jsonify, make_response, render_template
+from flask import Flask, render_template
+from flask_session import Session
 from web_dynamic.views import app_views
 
 
 app = Flask(__name__)
+app.config['SESSION_COOKIE_SECURE'] = True
+app.config['PERMANENT_SESSION_LIFETIME'] = 900
+app.config['SESSION_USE_SIGNER'] = True
+app.config['SESSION_TYPE'] = 'filesystem'
 app.secret_key = "My Secret Key"
 app.url_map.strict_slashes = False
+Session(app)
 app.register_blueprint(app_views, url_prefix="/")
 
 @app.teardown_appcontext
