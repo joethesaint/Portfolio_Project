@@ -58,6 +58,7 @@ class BaseModel:
         if self.__class__.__name__ == 'Restaurant':
             new_dict['min'] = self.price_range()['min']
             new_dict['max'] = self.price_range()['max']
+            new_dict['city'] = self.get_city().name
 
         if self.__class__.__name__ == 'Food':
             new_dict['restaurant_name'] = self.get_restaurant().name

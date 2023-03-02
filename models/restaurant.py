@@ -3,6 +3,8 @@
 Contains the Restaurant Class
 """
 
+import models
+from models.city import City
 from models.base_model import Base, BaseModel
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
@@ -64,4 +66,8 @@ class Restaurant(BaseModel, Base):
             price_dict['max'] = max(price_list)
 
         return price_dict
+
+    def get_city(self):
+        """Get details if the city with the restaurant is locacted"""
+        return models.storage.get(City, self.city_id)
 
