@@ -29,7 +29,7 @@ searchBtn.addEventListener('click', () => {
                 data.total_rate = "Not rated"
             }
             if (data.resource_type === "restaurant") {
-        resultBody.insertAdjacentHTML('beforeend', `<article class="col-3 mb-3">
+        resultBody.insertAdjacentHTML('beforeend', `<article class="col-3 mb-3 d-flex justify-content-between">
         <div class="card" style="width: 18rem;">
           <img src="static/images/background/bg-1.jpeg" class="card-img-top" alt="...">
           <div class="card-body">
@@ -38,6 +38,7 @@ searchBtn.addEventListener('click', () => {
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Price Range: <span class="float-end">&#8358;${ result.min } - &#8358;${ result.max }</span></li>
+          <li class="list-group-item">Location: <span class="float-end">${ result.address }, ${ result.city } </span></li>
           <li class="list-group-item">Rating: <span class="float-end">${ result.total_rate }</span></li>
           <li class="list-group-item">No. of Reviews <span class="float-end">${ result.no_of_reviews }</span></li>
         </ul>
@@ -48,7 +49,7 @@ searchBtn.addEventListener('click', () => {
     </article>`)
             }
             else if (data.resource_type === "food") {
-                resultBody.insertAdjacentHTML('beforeend', `<article class="col-3 mb-3">
+                resultBody.insertAdjacentHTML('beforeend', `<article class="col-3 mb-3 d-flex justify-content-between">
                 <div class="card" style="width: 18rem;">
                   <img src="static/images/background/bg-1.jpeg" class="card-img-top" alt="...">
                   <div class="card-body">
