@@ -31,7 +31,7 @@
                     </div>
                     <div class="invalid-feedback" id="fname-error" style="display: none;"></div>
                     <div class="input-group mb-3">
-                        <input type="number" name="price" step="0.01" id="price" class="form-control" placeholder="Price" value="{% if field %}{{ field['price'] }}{% endif %}">
+                        <input type="number" name="price" step="0.01" id="price" class="form-control" placeholder="Price" value="{% if field %}{{ field['price'] }}{% endif %}" required>
                     </div>
                     <div class="invalid-feedback" id="lname-error" style="display: none;">
                     </div>

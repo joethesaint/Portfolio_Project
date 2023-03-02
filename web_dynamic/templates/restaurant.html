@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}View Restaurant{% endblock title %}
+{% block title %}View {{ restaurant.name | title }}{% endblock title %}
 {% block body %}
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" >
     <div class="carousel-inner">
@@ -19,7 +19,7 @@
             </div>
           <div class="row mb-5">
               {% for food in restaurant.foods %}
-              <article class="col-3 mb-3">
+              <article class="col-3 mb-3 d-flex justify-content-between">
                   <div class="card" style="width: 18rem;">
                     <img src="{{ url_for('static', filename='images/background/bg-1.jpeg') }}" width="100%" class="card-img-top" alt="...">
                     <div class="card-body">

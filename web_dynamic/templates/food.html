@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}View food{% endblock title %}
+{% block title %}{{ food.name | title }}{% endblock title %}
 {% block body %}
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" >
     <div class="carousel-inner">

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Home Page{% endblock title %}
+{% block title %}Home{% endblock title %}
 {% block body %}
 
 {% include 'partials/_land.html' %}
@@ -10,7 +10,7 @@
     </div>
 <div class="row">
     {% for rest in top_restaurants %}
-      <article class="col-3 mb-3">
+      <article class="col-3 mb-3 d-flex justify-content-between">
           <div class="card" style="width: 18rem;">
             <img src="{{ url_for('static', filename='images/background/bg-1.jpeg') }}" class="card-img-top" alt="...">
             <div class="card-body">
@@ -19,6 +19,7 @@
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Price Range: <span class="float-end">&#8358;{{ rest.price_range().min }} - &#8358;{{ rest.price_range().max }}</span></li>
+            <li class="list-group-item">Location: <span class="float-end">{{ rest.address | title }}, {{ rest.get_city().name }} </span></li>
             <li class="list-group-item">Rating: <span class="float-end">{% if rest.reviews %}{{ rest.get_rating().total }} {% else %} not rated{% endif %}</span></li>
             <li class="list-group-item">No. of Reviews <span class="float-end">{{ rest.get_rating().len }}</span></li>
           </ul>
@@ -38,7 +39,7 @@
     </div>
 <div class="row">
     {% for food in top_foods %}
-    <article class="col-3 mb-3">
+    <article class="col-3 mb-3 d-flex justify-content-between">
         <div class="card" style="width: 18rem;">
           <img src="{{ url_for('static', filename='images/background/bg-1.jpeg') }}" class="card-img-top" alt="...">
           <div class="card-body">
@@ -67,7 +68,7 @@
   </div>
 <div class="row">
     {% for rest in new_restaurants %}
-    <article class="col-3 mb-3">
+    <article class="col-3 mb-3 d-flex justify-content-between">
         <div class="card" style="width: 18rem;">
           <img src="{{ url_for('static', filename='images/background/bg-1.jpeg') }}" class="card-img-top" alt="...">
           <div class="card-body">
@@ -76,6 +77,7 @@
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Price Range: <span class="float-end">&#8358;{{ rest.price_range().min }} - &#8358;{{ rest.price_range().max }}</span></li>
+          <li class="list-group-item">Location: <span class="float-end">{{ rest.address | title }}, {{ rest.get_city().name }} </span></li>
           <li class="list-group-item">Rating: <span class="float-end">{% if rest.reviews %}{{ rest.get_rating().total }} {% else %} not rated{% endif %}</span></li>
           <li class="list-group-item">No. of Reviews <span class="float-end">{{ rest.get_rating().len }}</span></li>
         </ul>
@@ -93,7 +95,7 @@
     </div>
   <div class="row mb-5">
       {% for food in new_foods %}
-      <article class="col-3 mb-3">
+      <article class="col-3 mb-3 d-flex justify-content-between">
           <div class="card" style="width: 18rem;">
             <img src="{{ url_for('static', filename='images/background/bg-1.jpeg') }}" class="card-img-top" alt="...">
             <div class="card-body">
