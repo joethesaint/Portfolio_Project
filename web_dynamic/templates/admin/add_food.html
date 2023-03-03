@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock title %}
+
+{% block body %}
+<div class="container">
+<div class="row mb-5">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+
+        <div class="card mt-5">
+            <div class="card-title">
+                <h3 class="mt-4 text-center">Adding Meal</h3>
+            </div>
+            <div class="card-body">
+
+                <form action="" method="post">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-sm alert-{{ category }}">{{message}}</div>
+                    {% endfor %}{% endif %}{% endwith %}
+                    <select class="form-select mb-3" name="restaurant" aria-label="Cities" id="location" >
+                        <option value="no_id" selected>Select Restaurant</option>
+                        {% for restaurant in restaurants %}
+                            <option value="{{ restaurant.id }}">{{ restaurant.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="input-group mb-3">
+                        <input type="text" name="name" id="name" class="form-control"  placeholder="Food Name" value="{% if field %}{{ field['name'] }}{% endif %}">
+                    </div>
+                    <div class="invalid-feedback" id="fname-error" style="display: none;"></div>
+                    <div class="input-group mb-3">
+                        <input type="number" name="price" step="0.01" id="price" class="form-control" placeholder="Price" value="{% if field %}{{ field['price'] }}{% endif %}" required>
+                    </div>
+                    <div class="invalid-feedback" id="lname-error" style="display: none;">
+                    </div>
+                    <p class="text-sm text-success" id="username-success"></p>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Describe Meal</label>
+                        <textarea class="form-control" id="description" name="description" rows="4" minlength="100" maxlength="1000" required></textarea>
+                        <span class="float-end fst-italic fs-6">Min length is 100 characters</span>
+                    </div>
+                    <div class="input-group mb-3 mt-5">
+                        <input type="submit" value="Add Meal" class="form-control btn btn-block btn-primary" id="btn-submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+</div>
+
+    <script src="{{ url_for('static', filename='scripts/register.js')}}"></script>
+{% endblock body %}

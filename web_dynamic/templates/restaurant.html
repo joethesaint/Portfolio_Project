@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block title %}View {{ restaurant.name | title }}{% endblock title %}
+{% block body %}
+<div id="myCarousel" class="carousel slide" data-bs-ride="carousel" >
+    <div class="carousel-inner">
+      <div class="" style="width: 100%;">
+        <img src="{{ url_for('static', filename='images/background/bg-1.jpeg') }}" class="bd-placeholder-img" >
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <h1>{{ restaurant.name }}</h1>
+    <p>Location:  {{ restaurant.address }} {{ city.name }} </p>
+    <p>{{ restaurant.description }}</p>
+        <section class="mb-5">
+            <div class="title">
+              <h2>Menu</h2>
+            </div>
+          <div class="row mb-5">
+              {% for food in restaurant.foods %}
+              <article class="col-3 mb-3 d-flex justify-content-between">
+                  <div class="card" style="width: 18rem;">
+                    <img src="{{ url_for('static', filename='images/background/bg-1.jpeg') }}" width="100%" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ food.name }}</h5>
+                      <p class="card-text fst-italic description" style="font-size: 13px;">{{ food.description }}</p> 
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Price <span class="float-end">&#8358;{{ food.price }}</span></li>
+                    <li class="list-group-item">Rating: <span class="float-end">{% if food.reviews %}{{ food.get_rating().total }} {% else %} not rated{% endif %}</span></li>
+                    <li class="list-group-item">No. of Reviews <span class="float-end">{{ food.get_rating().len }}</span></li>
+                  </ul>
+                  <div class="card-body">
+                    <a href="/foods/{{ food.id }}" class="card-link"><button class="btn btn-primary">See more</button></a>
+                    <a href="#" class="card-link"><button class="btn btn-primary float-end">Review</button></a>
+                  </div>
+              </article>
+            {% endfor %}
+          </div>
+          </section>
+          <section>
+              <div class="card p-3">
+    <div class="row mb-3">
+        <p class="fs-4 col"> Reviews ({{ restaurant.get_rating().len }})</p>
+        <a class="col-md-2" href="/restaurants/review/{{ restaurant.id }}"><button class="btn btn-primary float-end col-md-12">Write Review</button></a>  
+    </div>
+    <div class="row">
+        <p class="fs-5 col"> Total Rating</p>
+        <p class="fs-5 float-end col-2 text-center">{{ restaurant.get_rating().total }} / 5</p>
+    </div>
+    {% for key, value in restaurant.get_rating().items() %}
+        {% if key != 'total' and key != 'len' %}
+            <div class="row">
+                <p class="fs-6 col text-capitalize">{{ key }}</p>
+                <p class="fs-6 float-end col-2 text-center">{{ value }} / 5</p>
+            </div>
+        {% endif %}
+    {% endfor %}
+    {% for review in restaurant.reviews %}
+    <div class="card p-3 mb-3">
+        <div class="row card-title">
+            <p class="fs-5 col">Rated by {{ review.get_user().first_name }} {{ review.get_user().last_name }}</p>
+            <p class="fs-5 float-end col-2 text-center">{{ review.rating }} / 5</p>
+        </div><hr>
+        <div class="card-body">
+            <div class="row">
+                <p class="fs-6 col">Ambience</p>
+                <p class="fs-6 float-end col-2 text-center">{{ review.ambience }} / 5</p>
+                <p class="fs-6 col">Cleanliness</p>
+                <p class="fs-6 float-end col-2 text-center">{{ review.cleanliness }} / 5</p>
+            </div>
+            <div class="row">
+                <p class="fs-6 col">Service</p>
+                <p class="fs-6 float-end col-2 text-center">{{ review.service }} / 5</p>
+                <p class="fs-6 col">Uniqueness</p>
+                <p class="fs-6 float-end col-2 text-center">{{ review.uniqueness }} / 5</p>
+            </div>
+            <div class="row">
+                <div class="">
+                    <label for="" class="form-label">Details</label>
+                    <p class="form-control" id="" rows="3" style="background-color: white;">{{ review.text }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+          </section>
+        </div>
+{% endblock body %}

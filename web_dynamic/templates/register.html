@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock title %}
+
+{% block body %}
+<div class="container">
+<div class="row mb-5">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+
+        <div class="card mt-5">
+            <div class="card-title">
+                <h3 class="mt-4 text-center">Create an Account</h3>
+            </div>
+            <div class="card-body">
+
+                <form action="" method="post">
+                    <div class="input-group mb-3">
+                        <input type="text" name="first-name" id="fname-field" class="form-control" placeholder="First Name" value="{% if field %}{{ field['first-name'] }}{% endif %}">
+                    </div>
+                    <div class="invalid-feedback" id="fname-error" style="display: none;"></div>
+                    <div class="input-group mb-3">
+                        <input type="text" name="last-name" id="lname-field" class="form-control" placeholder="Last Name" value="{% if field %}{{ field['last-name'] }}{% endif %}">
+                    </div>
+                    <div class="invalid-feedback" id="lname-error" style="display: none;">
+                    </div>
+                    <p class="text-sm text-success" id="username-success"></p>
+                    <div class="input-group mb-3">
+                        <input type="email" name="email" id="email-field" class="form-control" placeholder="Email" value="{% if field %}{{ field['email'] }}{% endif %}">
+                    </div>
+                    <div class="invalid-feedback" id="email-error" style="display: none;">
+                    </div>
+                    <p class="text-sm text-success" id="email-success"></p>
+                    <div class="input-group">
+                        <input type="password" name="password" id="password-field" class="form-control" placeholder="Password">
+                    </div>
+                    <small class="float-end" id="toggle-password">SHOW</small>
+                    <div class="invalid-feedback" id="password-error" style="display: none;">
+                    </div>
+                    <div class="input-group mb-2 mt-4">
+                        <input type="password" name="cpassword" id="cpassword-field" class="form-control" placeholder="Confirm Password">
+                    </div>
+                    <div class="invalid-feedback" id="cpassword-error" style="display: none;">
+                    </div>
+                    <div class="input-group mb-3 mt-5">
+                        <input type="submit" value="Register" class="form-control btn btn-block btn-primary" id="btn-submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+</div>
+
+    <script src="{{ url_for('static', filename='scripts/register.js')}}"></script>
+{% endblock body %}

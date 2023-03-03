@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Reviewing {{ food.name }}{% endblock title %}
+
+{% block body %}
+<div class="container">
+<div class="row mt-5">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">
+                    <h3 class="mt-4 text-center">Reviewing {{ food.name }}</h3>
+                </div><hr>
+                <form class="row g-3 p-4" method="post" action="">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-sm alert-{{ category }}">{{message}}</div>
+                    {% endfor %}{% endif %}{% endwith %}
+                    <div class="col-md-6">
+                    <label for="appear" class="form-label">Appearance</label>
+                    <input type="range" class="form-range" name="appear" min="1" max="5" value="1">
+                    </div>
+                    <div class="col-md-6">
+                    <label for="exec" class="form-label">Execution</label>
+                    <input type="range" class="form-range" name="exec" min="1" max="5" value="1">
+                    </div>
+                    <div class="col-md-6">
+                    <label for="taste" class="form-label">Taste</label>
+                    <input type="range" class="form-range" name="taste" min="1" max="5" value="1">
+                    </div>
+                    <div class="col-md-6">
+                    <label for="quality" class="form-label">Quality</label>
+                    <input type="range" class="form-range" name="quality" min="1" max="5" value="1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Description of Experience</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" name="description" rows="4" minlength="100" maxlength="1000" required></textarea>
+                        <span class="float-end fst-italic fs-6">Min length is 100 characters</span>
+                    </div>
+                    <div class="input-group mt-4">
+                    <input type="submit" class="form-control btn btn-primary" value="Submit Review">
+                    </div>
+                </form>
+            </div>
+        </div>
+    <div class="col-md-2"></div>
+</div>
+</div>
+{% endblock body %}

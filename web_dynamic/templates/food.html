@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}{{ food.name | title }}{% endblock title %}
+{% block body %}
+<div id="myCarousel" class="carousel slide" data-bs-ride="carousel" >
+    <div class="carousel-inner">
+      <div class="" style="width: 100%;">
+        <img src="{{ url_for('static', filename='images/background/bg-1.jpeg') }}" class="bd-placeholder-img" >
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <h1>{{ food.name }}</h1>
+    <p>Served By: <a href="/restaurants/{{ food.get_restaurant().id }}">{{ food.get_restaurant().name }}</a>
+    <p>Location:  {{ food.get_restaurant().address }}</p>
+    <p>{{ food.description }}</p>
+          <section>
+              <div class="card p-3">
+    <div class="row mb-3">
+        <p class="fs-4 col"> Reviews ({{ food.get_rating().len }})</p>
+        <a class="col-md-2" href="/foods/review/{{ food.id }}"><button class="btn btn-primary float-end col-md-12">Write Review</button></a>  
+    </div>
+    <div class="row">
+        <p class="fs-5 col"> Total Rating</p>
+        <p class="fs-5 float-end col-2 text-center">{{ food.get_rating().total }} / 5</p>
+    </div>
+    {% for key, value in food.get_rating().items() %}
+        {% if key != 'total' and key != 'len' %}
+            <div class="row">
+                <p class="fs-6 col text-capitalize">{{ key }}</p>
+                <p class="fs-6 float-end col-2 text-center">{{ value }} / 5</p>
+            </div>
+        {% endif %}
+    {% endfor %}
+    {% for review in food.reviews %}
+    <div class="card p-3 mb-3">
+        <div class="row card-title">
+            <p class="fs-5 col">Rated by {{ review.get_user().first_name }} {{ review.get_user().last_name }}</p>
+            <p class="fs-5 float-end col-2 text-center">{{ review.rating }} / 5</p>
+        </div><hr>
+        <div class="card-body">
+            <div class="row">
+                <p class="fs-6 col">Appearance</p>
+                <p class="fs-6 float-end col-2 text-center">{{ review.appearance }} / 5</p>
+                <p class="fs-6 col">Execution</p>
+                <p class="fs-6 float-end col-2 text-center">{{ review.execution }} / 5</p>
+            </div>
+            <div class="row">
+                <p class="fs-6 col">Taste</p>
+                <p class="fs-6 float-end col-2 text-center">{{ review.taste }} / 5</p>
+                <p class="fs-6 col">Quality</p>
+                <p class="fs-6 float-end col-2 text-center">{{ review.quality }} / 5</p>
+            </div>
+            <div class="row">
+                <div class="">
+                    <label for="" class="form-label">Details</label>
+                    <p class="form-control" id="" rows="3" style="background-color: white;">{{ review.text }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+          </section>
+        </div>
+{% endblock body %}
