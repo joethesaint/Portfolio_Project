@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <title>foodfind · {% block title %}{% endblock title %}</title>
+    <title>foodFind · {% block title %}{% endblock title %}</title>
     <link rel="icon" href="{{ url_for('static', filename='images/logo2.png') }}" type="image/png">
 
   <link href="{{ url_for('static', filename='styles/bootstrap.min.css') }}" rel="stylesheet">
@@ -26,7 +26,10 @@
               <a class="btn btn-outline-danger me-2 float-end" href="/logout" role="button">Logout</a>
             {% else %}
               <a class="btn btn-outline-success me-2 float-end" href="/login" role="button">Login</a>
-              <a class="btn btn-outline-danger me-2 float-end" href="/register" role="button">Sign Up</a>
+              <a class="btn btn-outline-primary me-2 float-end" href="/register" role="button">Sign Up</a>
+            {% endif %}
+            {% if request.url != 'http://127.0.0.1:5000/search' %}
+              <a class="btn btn-outline-success me-2 float-end" href="/search" role="button">Search</a>
             {% endif %}
         </div>
       </div>
@@ -44,10 +47,10 @@
 
 </main>  
   <!-- FOOTER -->
-  <footer class=" text-center mt-3">
-  <div class="">
+  <footer class=" text-center ">
+  <div class="p-auto mt-auto">
     <p class="float-end"><a href="#">Back to top</a></p>
-    <p>&copy; 2017–2023 foodfind, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    <p> 2023 &copy; foodFind &middot; <a href="/about">About</a> 
   </div>
   </footer>
       

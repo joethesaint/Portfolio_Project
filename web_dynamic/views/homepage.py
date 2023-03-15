@@ -88,3 +88,7 @@ def search():
     return render_template('search.html', cities=cities, restaurants=restaurants)
 
 
+@app_views.route('/about')
+def about():
+    return render_template('about.html')
+

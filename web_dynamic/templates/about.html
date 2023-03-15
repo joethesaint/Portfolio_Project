@@ -1,0 +1,44 @@
+
+{% extends 'base.html' %}
+{% block title %}About foodfind{% endblock title %}
+
+{% block body %}
+    {% include 'partials/_land.html' %}
+    <div id="content"></div>
+<div style="width: 92%; margin: auto;">
+    <section class="mb-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-4 mt-auto mb-auto mt-2">
+                    <h2>Find Restaurants and Food</h2>
+                    <p>Find restaurants and meals on the go.</p>
+                    <a href="/search" class="btn btn-primary">Search</a>
+                </div>
+                <div class="col-md-8 float-end">
+                    <img class="" src="{{url_for('static', filename='images/search.png')}}" alt="" height="inherit", width="100%">
+                </div>
+            </div>
+            <div class="row mb-5 mt-3">
+                <div class="col-md-8 float-start">
+                    <img class="" src="{{url_for('static', filename='images/review.png')}}" alt="" height="inherit", width="100%">
+                </div>
+                <div class="col-md-4 mt-auto mb-auto">
+                    <h2>Review Retaurants and Meals</h2>
+                    <p>Tell others about the your experience of a restaurant or meal, when you do have such an experience</p>
+                    <a href="/login" class="btn btn-primary">Login</a>
+                </div>
+            </div>
+            <div class="row mb-5 mt-3">
+                <div class="col-md-4 mt-auto mb-auto">
+                    <h2>Easy access</h2>
+                    <p>See the best and new restaurants and meals as reviewed by people who have been there.</p>
+                    <a href="/" class="btn btn-primary">Explore</a>
+                </div>
+                <div class="col-md-8 float-end">
+                    <img class="" src="{{url_for('static', filename='images/homepage.png')}}" alt="" height="inherit", width="100%">
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock body %}
